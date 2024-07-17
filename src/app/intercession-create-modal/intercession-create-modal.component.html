@@ -1,0 +1,55 @@
+<div [formGroup]="form">
+  <div class="grid grid-cols-2 py-2">
+    <div>
+      <div class="px-4">
+        <div class="text-blue-950 font-semibold">Adresse</div>
+        <p-autoComplete styleClass="w-full"
+                        [forceSelection]="true"
+                        inputStyleClass="w-full"
+                        formControlName="address"
+                        [suggestions]="autocompleteAddress"
+                        (completeMethod)="searchAddress($event)"
+                        optionValue="properties.name"
+                        optionLabel="properties.label"
+                        placeholder="Adresse"/>
+      </div>
+      <div class="flex py-2 px-4">
+        <div class="text-blue-950 font-semibold w-16 my-3">Type :</div>
+        <p-dropdown styleClass="w-56"
+                    formControlName="type"
+                    [options]="Intercession.IntercessionTypeEnumList"
+                    optionValue="value"
+                    optionLabel="label"
+                    placeholder="Type"/>
+      </div>
+      <div class="flex py-2 px-4">
+        <div class="text-blue-950 font-semibold w-16 my-3">Statut :</div>
+        <p-dropdown styleClass="w-56"
+                    formControlName="status"
+                    [options]="Intercession.IntercessionStatusEnumList"
+                    optionValue="value"
+                    optionLabel="label"
+                    placeholder="Status"/>
+      </div>
+      <div class="py-2 px-4">
+        <div class="text-blue-950 font-semibold">Description</div>
+        <textarea class="w-full h-14" id="description" formControlName="description" placeholder="Description"
+                  pInputTextarea></textarea>
+      </div>
+
+    </div>
+
+
+    <div class="px-4">
+      <div class="text-blue-950 font-semibold">Date :</div>
+      <p-calendar [inline]="true" formControlName="date" [showTime]="true"
+                  hourFormat="24"/>
+    </div>
+
+
+  </div>
+
+  <button class="bg-green-700 text-white hover:bg-green-900 rounded-md p-3" (click)="create()">Créer l'intervention
+  </button>
+</div>
+

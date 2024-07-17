@@ -1,0 +1,62 @@
+<p-table [value]="store.intercessions()" dataKey="id" styleClass="p-datatable-striped">
+  <ng-template pTemplate="header">
+    <tr>
+      <th></th>
+      <th>Adresse</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-intercession let-expanded="expanded">
+    <tr>
+      <td>
+        <p-button type="button" pRipple [pRowToggler]="intercession" [text]="true" [rounded]="true" [plain]="true"
+                  [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"/>
+      </td>
+      <td>{{ intercession.address }}</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="rowexpansion" let-intercession>
+    <tr>
+      <td colspan="2">
+        <div class="p-3">
+          <p-table [value]="intercession.operations" dataKey="id">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Status</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-operation>
+              <tr>
+                <td>
+                  <p-calendar [(ngModel)]="operation.date" [showTime]="true" hourFormat="24" [disabled]="true"/>
+                </td>
+                <td>{{ operation.description }}</td>
+                <td>
+                  <div class="font-bold" [ngClass]="{
+                  'text-viola-500': operation.type === IntercessionTypeEnum.TECHNIC,
+                  'text-blue-500': operation.type === IntercessionTypeEnum.HOUSEHOLD,
+                  'text-orange-500': operation.type === IntercessionTypeEnum.MEDIATION,
+                  }">
+                    {{ Intercession.getTypeText(operation.type) }}
+                  </div>
+                </td>
+                <td>
+                  <div class="font-bold" [ngClass]="{
+                  'text-green-500': operation.status === IntercessionStatusEnum.DONE,
+                  'text-blue-500': operation.status === IntercessionStatusEnum.IN_PROGRESS,
+                  'text-red-500': operation.status === IntercessionStatusEnum.TO_PLAN,
+                  'text-orange-500': operation.status === IntercessionStatusEnum.PENDING
+                  }">
+                    {{ Intercession.getStatusText(operation.status) }}
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

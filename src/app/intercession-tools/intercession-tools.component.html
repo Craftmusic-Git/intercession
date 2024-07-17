@@ -1,0 +1,21 @@
+<div class="w-full flex justify-between">
+  <div>
+    <p-fileUpload
+      mode="basic"
+      chooseIcon="pi pi-upload"
+      url="https://www.primefaces.org/cdn/api/upload.php"
+      maxFileSize="1000000"
+      (onUpload)="onFileChange($event)"
+      [auto]="true"
+      chooseLabel="Charger un fichier d'interventions"/>
+  </div>
+
+  <button class="bg-green-500 rounded-md px-4 text-gray-50 font-bold"
+          (click)="create()">
+    Ajouter une intervention
+  </button>
+
+  <button class="bg-blue-500 rounded-md px-4 text-gray-50 font-bold"
+          (click)="downloadCsv(generateCsvData(), 'intervention.csv')">Télécharger CSV
+  </button>
+</div>

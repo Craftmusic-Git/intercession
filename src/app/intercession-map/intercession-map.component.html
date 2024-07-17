@@ -1,0 +1,12 @@
+<div>
+  <google-map [center]="{lat: 48.5833, lng: 7.75 }"
+              [width]="1000"
+              [zoom]="14">
+    @for (intercession of store.intercessions(); track intercession.id) {
+      <map-marker (mapClick)="selectedIntercession(intercession)"
+                  [position]="retrieveIntercessionPosition(intercession)"
+                  [title]="intercession.address"></map-marker>
+
+    }
+  </google-map>
+</div>
